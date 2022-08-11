@@ -11,7 +11,17 @@ import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-
+/**
+ * 以下命令生成的文件会存放在当前目录下
+ * -- 生成随机参数
+ * openssl dsaparam -out dsa_param.pem 1024
+ * -- 生成DSA私钥 privkey.pem
+ * openssl gendsa -out dsa_private_key.pem dsa_param.pem
+ * -- 生成DSA公钥 pubkey.pem
+ * openssl dsa -in dsa_private_key.pem -pubout -out dsa_public_key.pem
+ * -- 对私钥进行pkcs8编码
+ * openssl pkcs8 -topk8 -in dsa_private_key.pem -out pkcs8_dsa_private_key.pem -nocrypt
+ * */
 public class DSATest {
     private static final String PRIVATE_KEY = "-----BEGIN PRIVATE KEY-----\n" +
             "MIIBSgIBADCCASsGByqGSM44BAEwggEeAoGBAMNUsRMfJ32hCOnjO3UpEeEjebnp\n" +

@@ -10,7 +10,15 @@ import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-
+/**
+ * 以下命令生成的文件会存放在当前目录下
+ * -- 生成私钥命令
+ * openssl genrsa -out rsa_private_key.pem 1024
+ * -- 生成公钥命令
+ * openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem
+ * -- 对私钥进行pkcs8编码
+ * openssl pkcs8 -topk8 -in rsa_private_key.pem -out pkcs8_rsa_private_key.pem -nocrypt
+ * */
 public class RSATest {
     public static final String PRIVATE_KEY_PEM = "/Users/j/Desktop/rsa/pkcs8_rsa_private_key.pem";
     public static final String PUBLIC_KEY_PEM = "/Users/j/Desktop/rsa/ras_public_key.pem";
@@ -22,7 +30,7 @@ public class RSATest {
     public static void main(String[] args) throws Exception {
         PrivateKey privateKey = getPrivateKeyFromPem();
         PublicKey publicKey = getPublicKeyFromPem();
-        String data = "测试123";
+        String data = "hello world";
 
         /*************************************************************************************************/
         //私钥加密
